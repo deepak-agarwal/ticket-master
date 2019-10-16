@@ -6,7 +6,7 @@ const departmentController = require('../apps/controller/departmentController')
 const ticketController = require('../apps/controller/ticketController')
 
 
-router.get('/', customerController.list)
+router.get('/customers', customerController.list)
 router.get('/customers/:id', customerController.show)
 router.post('/customers', customerController.create)
 router.put('/customers/:id', customerController.update)
