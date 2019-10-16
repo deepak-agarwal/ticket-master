@@ -5,7 +5,10 @@ const cors = require('cors')
 const path = require("path");
 
 const app = express();
-console.log(path.join(__dirname, '/client/build'))
+
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+
 
 const port = process.env.PORT || 6000;
 
