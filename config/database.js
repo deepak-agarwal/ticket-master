@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 mongoose.Promise = global.Promise;
 
 mongoose
-  .connect("mongodb+srv://dbUser:SP6STkFIHR43hYGn@cluster0-cnqpd.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true })
+  .connect( process.env.MONGODB_URI || "mongodb://localhost:27017/ticket-master", { useNewUrlParser: true })
   .then(() => {
     console.log("Connection Established with db");
   })
