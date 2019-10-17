@@ -1,15 +1,16 @@
 import React, { Component } from "react"
 import CustomerItem from "./item"
-import axios from '../config/axios'
-import  CustomerForm  from "./form";
+import axios from "../config/axios"
+import CustomerForm from "./form"
+import {Row,Col} from 'reactstrap'
 
 class CustomerDashboard extends Component {
 	constructor() {
 		super()
 		this.state = {
-            customers: [],
-            isEdit:false,
-            customer: null
+			customers: [],
+			isEdit: false,
+			customer: null
 		}
 	}
 	componentDidMount() {
@@ -24,61 +25,57 @@ class CustomerDashboard extends Component {
 			.catch(err => {
 				console.log(err)
 			})
-    }
-
-    handleNewCustomer = (customer) => {
-		console.log(customer.id)
-		customer.id && (
-			axios
-		  .put(`/customers/${customer.id}`, customer)
-		  .then(response => {
-			console.log(response.data)
-			if (response.data.errors) {
-			  window.alert(response.data.message)
-			  console.log('validation error', response.data.error)
-			} else {
-			  console.log('success', response.data)
-			  axios
-			.get(`/customers`)
-			.then(response => {
-				const customers = response.data
-				this.setState({
-					customers,
-					isEdit:false,
-					customer: {}
-				})
-			})
-			.catch(err => {
-				console.log(err)
-			})
-			//   this.props.history.push(`/customers/${response.data._id}`)
-			}
-		  })
-		) 
-
-		customer.id  || (
-        axios
-          .post(`/customers`,customer)
-          .then(response => {
-            if (response.data.errors) {
-              alert(response.data.message)
-            } else {
-            const customer = response.data
-            // console.log(customer)
-            this.setState(prevState=>({
-                customers: [...prevState.customers,customer]
-            }))
-            }
-          }))
-      }
-
-    handleEdit = customer=>{
-        const isEdit = true
-        this.setState( {
-            customer,isEdit
-        })
 	}
-	
+
+	handleNewCustomer = customer => {
+		console.log(customer.id)
+		customer.id &&
+			axios.put(`/customers/${customer.id}`, customer).then(response => {
+				console.log(response.data)
+				if (response.data.errors) {
+					window.alert(response.data.message)
+					console.log("validation error", response.data.error)
+				} else {
+					console.log("success", response.data)
+					axios
+						.get(`/customers`)
+						.then(response => {
+							const customers = response.data
+							this.setState({
+								customers,
+								isEdit: false,
+								customer: {}
+							})
+						})
+						.catch(err => {
+							console.log(err)
+						})
+					//   this.props.history.push(`/customers/${response.data._id}`)
+				}
+			})
+
+		customer.id ||
+			axios.post(`/customers`, customer).then(response => {
+				if (response.data.errors) {
+					alert(response.data.message)
+				} else {
+					const customer = response.data
+					// console.log(customer)
+					this.setState(prevState => ({
+						customers: [...prevState.customers, customer]
+					}))
+				}
+			})
+	}
+
+	handleEdit = customer => {
+		const isEdit = true
+		this.setState({
+			customer,
+			isEdit
+		})
+	}
+
 	handleRemoveCustomer = id => {
 		axios
 			.delete(`/customers/${id}`)
@@ -94,36 +91,35 @@ class CustomerDashboard extends Component {
 			})
 	}
 
-	useDiv ={
-		display:'flex'
-	}
-	useFix={
-		// position:'fixed',
-		position :'relative'
-	}
 	render() {
 		return (
-			<div style={this.useDiv}>
-				<div >
+			<Row>
+				<Col xs="8">
 					{/* List */}
+					<Row>
 					{this.state.customers.map(customer => {
 						return (
 							<CustomerItem
 								key={customer._id}
-                                customer={customer}
-                                handleRemoveCustomer={this.handleRemoveCustomer}
-                                handleEdit={this.handleEdit}
+								customer={customer}
+								handleRemoveCustomer={this.handleRemoveCustomer}
+								handleEdit={this.handleEdit}
 							/>
 						)
 					})}
-				</div>
-				<div style={this.useFix}>
-                    {/* edit/add */}
-                    <CustomerForm customer={this.state.customer}
-                    isEdit={this.state.isEdit}
-                    handleNewCustomer={this.handleNewCustomer} />
-				</div>
-			</div>
+					</Row>
+				</Col>
+				<Col xs="4" > 
+					{/* edit/add */}
+		
+					<CustomerForm
+						customer={this.state.customer}
+						isEdit={this.state.isEdit}
+						handleNewCustomer={this.handleNewCustomer}
+					/>
+				
+				</Col>
+			</Row>
 		)
 	}
 }

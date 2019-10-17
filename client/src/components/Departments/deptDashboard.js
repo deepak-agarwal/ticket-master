@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from '../config/axios'
 import DeptItem from './depaItem'
 import DepartmentForm from './deptForm'
+import {Row,Col} from 'reactstrap'
 
 export class DeptDashboard extends Component {
     constructor(){
@@ -89,15 +90,13 @@ export class DeptDashboard extends Component {
             department,isEdit
         })
 	}
-    useDiv ={
-		display:'flex'
-	}
 
     render() {
         return (
-            <div style={this.useDiv}>
-                <div>
-                        {this.state.departments.map(department=>{ 
+            <Row>
+              <Col xs='8'>
+                <Row>
+                {this.state.departments.map(department=>{ 
                                 return (<DeptItem 
                                 key={department._id}
                                 department={department}
@@ -105,13 +104,16 @@ export class DeptDashboard extends Component {
                                 handleEdit={this.handleEdit}
                                 />)
                         })}
-                </div>
-                <div>
-                        <DepartmentForm department={this.state.department}
+                </Row>
+              </Col>
+              <Col xs='4'>
+              <DepartmentForm department={this.state.department}
                         isEdit={this.state.isEdit}
                         handleNewDepartment={this.handleNewDepartment}/>
-                </div>
-            </div>
+              </Col>
+            </Row>
+                       
+
         )
     }
 }

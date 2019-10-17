@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import axios from '../config/axios';
 import EmployeeItem from './empItem'
 import EmployeeForm from './empForm'
+import {Row,Col} from 'reactstrap'
+
 
 export class EmpDashboard extends Component {
     constructor(){
@@ -94,8 +96,10 @@ export class EmpDashboard extends Component {
 
     render() {
         return (
-            <div>
-                <div>
+            <Row>
+				<Col xs="8">
+					{/* List */}
+					<Row>
                     {this.state.employees.map(employee => {
                         return(
                             <EmployeeItem 
@@ -106,13 +110,15 @@ export class EmpDashboard extends Component {
                             />
                         )
                     })}
-                </div>
-                <div>
+             	</Row>
+				</Col>
+				<Col xs="4" > 
+					{/* edit/add */}
                 <EmployeeForm employee={this.state.employee}
                     isEdit={this.state.isEdit}
                     handleNewEmployee={this.handleNewEmployee} />
-                </div>
-            </div>
+          	</Col>
+			</Row>
         )
     }
 }

@@ -10,7 +10,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 
 
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 3005;
 
 app.use(express.json());
 app.use(cors())

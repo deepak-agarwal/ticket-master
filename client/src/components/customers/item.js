@@ -1,18 +1,28 @@
 import React from "react"
-
+import {
+	Card,
+	CardBody,
+	CardTitle,
+	CardSubtitle,
+	Button,Col
+} from "reactstrap"
 
 function CustomerItem(props) {
 	const { customer } = props
 	return (
-		<div>
-			<p>Name:{customer.name}</p>
-			<p>Email:{customer.email}</p>
-			<p>Mobile:{customer.mobile}</p>
-			<span>
-				<button onClick={()=>props.handleEdit(customer)}>Edit</button>
-				<button onClick={()=>props.handleRemoveCustomer(customer._id)}>Delete</button>
-			</span>
-		</div>
+		<Col xs='4'>
+			<Card>
+				<CardBody>
+					<CardTitle>{customer.name}</CardTitle>
+					<CardSubtitle>{customer.email}</CardSubtitle>
+					<CardSubtitle>{customer.mobile}</CardSubtitle>
+					<Button onClick={() => props.handleEdit(customer)}>Edit</Button>
+					<Button className="primary" onClick={() => props.handleRemoveCustomer(customer._id)}>
+						Delete
+					</Button>
+				</CardBody>
+			</Card>
+		</Col>
 	)
 }
 

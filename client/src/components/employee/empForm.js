@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from '../config/axios'
+import { Button, Form, FormGroup, Label, Input } from "reactstrap"
+
 
 export default class EmployeeForm extends React.Component {
   constructor() {
@@ -63,39 +65,40 @@ export default class EmployeeForm extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input
-              type="text"
-              value={this.state.name}
-              onChange={this.handleChange}
-              name="name"
-            />
-          </label>
-          <br />
-          <br />
-          <label>
-            Email:
-            <input
-              type="text"
-              value={this.state.email}
-              onChange={this.handleChange}
-              name="email"
-            />
-          </label>
-          <br />
-          <br />
-          <label>
-            Mobile:
-            <input
-              type="text"
-              value={this.state.mobile}
-              onChange={this.handleChange}
-              name="mobile"
-            />
-          </label>
-          <br />
-          <br />
+        <FormGroup>
+						<Label for='Name'>Name</Label>
+						<Input
+							type='text'
+							name='name'
+							id='Name'
+							value={this.state.name}
+							onChange={this.handleChange}
+							placeholder='Enter name'
+						/>
+					</FormGroup>
+          <FormGroup>
+						<Label for='Email'>Email</Label>
+						<Input
+							type='email'
+							name='email'
+							id='Email'
+							value={this.state.email}
+							onChange={this.handleChange}
+							placeholder='Enter your email'
+						/>
+					</FormGroup>
+          <FormGroup>
+						<Label for='Mobile'>Mobile</Label>
+						<Input
+							type='text'
+							name='mobile'
+							id='Mobile'
+							value={this.state.mobile}
+							onChange={this.handleChange}
+							placeholder='Mobile Number'
+						/>
+					</FormGroup>
+
           <label>
             Department:
             {this.props.isEdit?(<select
@@ -128,8 +131,7 @@ export default class EmployeeForm extends React.Component {
               })}
             </select>)}
           </label>
-          <br /> <br />
-          <input type="submit" />
+          <Button>{(this.state.isEdit)?'Edit':'Submit'}</Button>
         </form>
       </div>
     )

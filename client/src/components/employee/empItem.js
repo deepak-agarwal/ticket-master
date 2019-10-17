@@ -1,19 +1,30 @@
 import React from "react"
-
+import {
+	Card,
+	CardBody,
+	CardTitle,
+	CardSubtitle,
+	Button,
+	Col
+} from "reactstrap"
 
 function EmployeeItem(props) {
 	const { employee } = props
 	return (
-		<div>
-			<p>Name:{employee.name}</p>
-			<p>Email:{employee.email}</p>
-			<p>Mobile:{employee.mobile}</p>
-            <p>Department:{employee.department.name}</p>
-			<span>
-				<button onClick={()=>props.handleEdit(employee)}>Edit</button>
-				<button onClick={()=>props.handleRemoveEmployee(employee._id)}>Delete</button>
-			</span>
-		</div>
+		<Col xs='4'>
+			<Card>
+				<CardBody>
+					<CardTitle>{employee.name}</CardTitle>
+					<CardSubtitle>{employee.email}</CardSubtitle>
+					<CardSubtitle>{employee.mobile}</CardSubtitle>
+					<CardSubtitle>{employee.department.name}</CardSubtitle>
+					<Button onClick={() => props.handleEdit(employee)}>Edit</Button>
+					<Button onClick={() => props.handleRemoveEmployee(employee._id)}>
+						Delete
+					</Button>
+				</CardBody>
+			</Card>
+		</Col>
 	)
 }
 

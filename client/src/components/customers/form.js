@@ -1,4 +1,5 @@
 import React from "react"
+import { Button, Form, FormGroup, Label, Input } from "reactstrap"
 
 class CustomerForm extends React.Component {
 	constructor(props) {
@@ -7,7 +8,7 @@ class CustomerForm extends React.Component {
 			name: "",
 			email: "",
 			mobile: "",
-			isEdit:false
+			isEdit: false
 		}
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
@@ -24,23 +25,23 @@ class CustomerForm extends React.Component {
 			name: this.state.name,
 			email: this.state.email,
 			mobile: this.state.mobile
-	}
-	this.setState({
-		name:'',
-		email:'',
-		mobile:'',
-	  })
-	this.props.customer && (formData.id = this.props.customer._id) 
-    this.props.handleNewCustomer(formData)
+		}
+		this.setState({
+			name: "",
+			email: "",
+			mobile: ""
+		})
+		this.props.customer && (formData.id = this.props.customer._id)
+		this.props.handleNewCustomer(formData)
 	}
 
 	static getDerivedStateFromProps(props, state) {
 		if (props.isEdit !== state.isEdit) {
 			return {
-				name:props.customer.name,
+				name: props.customer.name,
 				email: props.customer.email,
 				mobile: props.customer.mobile,
-				isEdit:props.isEdit
+				isEdit: props.isEdit
 			}
 		}
 		// Return null if the state hasn't changed
@@ -50,43 +51,44 @@ class CustomerForm extends React.Component {
 	render() {
 		return (
 			<div>
-				<form onSubmit={this.handleSubmit}>
-					<label>
-						Name:
-						<input
+				<Form onSubmit={this.handleSubmit}>
+					<FormGroup>
+						<Label for='Name'>Name</Label>
+						<Input
 							type='text'
+							name='name'
+							id='Name'
 							value={this.state.name}
 							onChange={this.handleChange}
-							name='name'
+							placeholder='Enter name'
 						/>
-					</label>
-					<br />
-					<br />
-					<label>
-						Email:
-						<input
-							type='text'
+					</FormGroup>
+					<FormGroup>
+						<Label for='Email'>Email</Label>
+						<Input
+							type='email'
+							name='email'
+							id='Email'
 							value={this.state.email}
 							onChange={this.handleChange}
-							name='email'
+							placeholder='Enter your email'
 						/>
-					</label>
-
-					<br />
-					<br />
-					<label>
-						Mobile:
-						<input
-							type='number'
+					</FormGroup>
+					<FormGroup>
+						<Label for='Mobile'>Mobile</Label>
+						<Input
+							type='text'
+							name='mobile'
+							id='Mobile'
 							value={this.state.mobile}
 							onChange={this.handleChange}
-							name='mobile'
+							placeholder='Mobile Number'
 						/>
-					</label>
-					<br />
-					<br />
-					<input type='submit' value='submit' />
-				</form>
+					</FormGroup>
+					
+					<Button>{(this.state.isEdit)?'Edit':'Submit'}</Button>
+				</Form>
+			
 			</div>
 		)
 	}
