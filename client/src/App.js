@@ -4,11 +4,8 @@ import CustomerDashboard from "./components/customers/dashboard"
 import DeptDashboard from "./components/Departments/deptDashboard"
 import EmpDashboard from "./components/employee/empDashboard"
 import TicketDashboard from "./components/ticket/ticketDashboard"
-// import { Nav, NavItem, NavLink } from "reactstrap"
 import {
-	Collapse,
 	Navbar,
-	NavbarToggler,
 	NavbarBrand,
 	Nav,
 	NavItem,
@@ -21,13 +18,11 @@ function App() {
 
 	return (
 		<Router>
-			<Navbar color='dark' light>
+			<Navbar color='dark' light expand="md">
 				<NavbarBrand href='/' className='mr-auto'>
 					Ticket Master
 				</NavbarBrand>
-				<NavbarToggler onClick={toggleNavbar} className='mr-2' />
-				<Collapse isOpen={!collapsed} navbar>
-					<Nav navbar>
+					<Nav className="ml-auto" navbar>
 					<NavItem>
 					<NavLink href='#'>
 						<Link to='/'>Home</Link>
@@ -54,7 +49,6 @@ function App() {
 					</NavLink>
 				</NavItem>
 					</Nav>
-				</Collapse>
 			</Navbar>
 			<div>
 				<Switch>

@@ -83,7 +83,6 @@ class Ticketnew extends React.Component {
 				array.push({ value: item._id, label: item.name, name: "customer" })
 			})
 			this.setState({ customers: array })
-			console.log(array)
 		})
 		axios.get("/employees").then(response => {
 			const array = []
