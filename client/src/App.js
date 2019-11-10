@@ -20,14 +20,9 @@ function App() {
 		<Router>
 			<Navbar color='dark' light expand="md">
 				<NavbarBrand href='/' className='mr-auto'>
-					Ticket Master
+				Ticket Master
 				</NavbarBrand>
 					<Nav className="ml-auto" navbar>
-					<NavItem>
-					<NavLink href='#'>
-						<Link to='/'>Home</Link>
-					</NavLink>
-				</NavItem>
 				<NavItem>
 					<NavLink href='#'>
 						<Link to='/customers'>Customer</Link>

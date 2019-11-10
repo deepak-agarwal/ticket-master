@@ -1,7 +1,7 @@
 const Ticket = require('../model/ticket')
 
 module.exports.list = (req,res) =>{
- Ticket.find()
+ Ticket.find().populate('departmentId').populate('employeeIds').populate('customerId')
  .then(tickets => res.json(tickets))
  .catch(err => console.log(err))
 }
